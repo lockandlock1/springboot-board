@@ -1,4 +1,4 @@
-package com.hong.admin.domain;
+package com.hong.admin.domain.posts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
