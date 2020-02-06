@@ -1,5 +1,6 @@
 package com.hong.admin.web;
 
+import com.hong.admin.PerfLogging;
 import com.hong.admin.service.posts.PostsService;
 import com.hong.admin.web.dto.PostsResponseDto;
 import com.hong.admin.web.dto.PostsSaveRequestDto;
@@ -22,6 +23,7 @@ public class PostsApiController {
         return postsService.update(id, requestDto);
     }
 
+    @PerfLogging
     @GetMapping("api/v1/posts/{id}")
     public PostsResponseDto findById(@PathVariable Long id){
         return postsService.findById(id);
