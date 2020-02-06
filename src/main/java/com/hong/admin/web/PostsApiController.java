@@ -15,16 +15,16 @@ public class PostsApiController {
 
     @PostMapping("/api/v1/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto){
-        Long id = postsService.save(requestDto);
-        return id;
+
+        return postsService.save(requestDto);
+
     }
 
     @PutMapping("/api/v1/posts/{id}")
-    public String update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
-        Long idd = postsService.update(id, requestDto);
-//        return postsService.update(id, requestDto);
+    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
 
-        return "SUCk";
+        return postsService.update(id, requestDto);
+
     }
 
     @PerfLogging
