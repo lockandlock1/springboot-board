@@ -1,6 +1,5 @@
 package com.hong.admin.config.auth;
 
-import com.hong.admin.config.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

@@ -1,4 +1,4 @@
-package com.hong.admin.config;
+package com.hong.admin.config.auth;
 
 import com.hong.admin.config.auth.dto.OAuthAttributes;
 import com.hong.admin.config.auth.dto.SessionUser;
