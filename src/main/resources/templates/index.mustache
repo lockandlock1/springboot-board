@@ -34,7 +34,9 @@
                     <tr>
                         <td>{{id}}</td>
                         <td><a href="/posts/update/{{id}}">{{title}}</a></td>
-                        <td>{{author}} <button class="btn btn-primary">팔로우</button></td>
+                        <td><a href="/user/info/{{id}}">{{author}}</a>
+                            <a href= "/" class="btn btn-primary" role="button">팔로우</a>
+                        </td>
                         <td>{{modifiedDate}}</td>
                     </tr>
                 {{/posts}}
