@@ -35,10 +35,15 @@ public class IndexController {
     }
 
     @GetMapping("/posts/save")
-    public String postsSave(){
+    public String postsSave(Model model){
+
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+
+        model.addAttribute("loginUserName", user.getName());
 
         return "posts-save";
     }
+
 
     @GetMapping("posts/update/{id}")
     public String postsUpdate(@PathVariable Long id, Model model){
