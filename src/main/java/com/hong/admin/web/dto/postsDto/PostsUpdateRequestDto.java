@@ -1,4 +1,4 @@
-package com.hong.admin.web.dto;
+package com.hong.admin.web.dto.postsDto;
 
 import com.hong.admin.domain.posts.Posts;
 import lombok.Builder;

@@ -1,35 +1,39 @@
 {{>layout/header}}
+<h1> 팔로워/팔로잉 현황판 </h1>
+<input type="text" class="form-control" id="email" value="{{user.email}}" readonly>
 
-<h1>개인 화면 </h1>
-
+<br/>
+<h3>login User : {{loginUser}}</h3>
+<br/>
 <div class="col-md-12">
     <div class="row">
         <div class="col-md-6">
-            <a href="/" role="button" class="btn btn-primary">
-                 팔로우
-            </a>
+            <button type="button" class="btn btn-primary" id="btn-follow">팔로우</button>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary" id="btn-follow-cancel">팔로우 취소</button>
         </div>
     </div>
     <br>
     <!--목록 출력 영역-->
     <table class="table table-horizontal table-boarded">
         <thead class="thead-strong">
-        <tr>
-            <th>게시글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>최종수정일</th>
-        </tr>
+            <tr>
+                <th>팔로워</th>
+                <th>팔로우</th>
+            </tr>
         </thead>
+            {{#follower}}
+                <tr>
+                    <td>{{fromId}}</td>
+                </tr>
+            {{/follower}}
+            {{#following}}
+                <tr>
+                    <td>{{toId}}</td>
+                </tr>
+            {{/following}}
         <tbody id="tbody">
-        <!--{{#posts}}-->
-            <!--<tr>-->
-                <!--<td>{{id}}</td>-->
-                <!--<td><a href="/posts/update/{{id}}">{{title}}</a></td>-->
-                <!--<td>{{author}}</td>-->
-                <!--<td>{{modifiedDate}}</td>-->
-            <!--</tr>-->
-        <!--{{/posts}}-->
         </tbody>
     </table>
 </div>

@@ -8,14 +8,14 @@
                     <a href="/posts/save" role="button" class="btn btn-primary">
                         글 등록
                     </a>
-                    {{#loginUserName}}
-                        Logged in as: <span id="user">{{loginUserName}}</span>
+                    {{#loginUserEmail}}
+                        Logged in as: <span id="user">{{loginUserEmail}}</span>
 
                         <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-                    {{/loginUserName}}
-                    {{^loginUserName}}
+                    {{/loginUserEmail}}
+                    {{^loginUserEmail}}
                         <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
-                    {{/loginUserName}}
+                    {{/loginUserEmail}}
                 </div>
         </div>
         <br>
@@ -34,8 +34,7 @@
                     <tr>
                         <td>{{id}}</td>
                         <td><a href="/posts/update/{{id}}">{{title}}</a></td>
-                        <td><a href="/user/info/{{id}}">{{author}}</a>
-                            <a href= "/" class="btn btn-primary" role="button">팔로우</a>
+                        <td>{{author}}(<a href="/user/info/{{email}}">{{email}}</a>)
                         </td>
                         <td>{{modifiedDate}}</td>
                     </tr>

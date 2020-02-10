@@ -2,8 +2,8 @@ package com.hong.admin.web;
 
 import com.hong.admin.domain.posts.Posts;
 import com.hong.admin.domain.posts.PostsRepository;
-import com.hong.admin.web.dto.PostsSaveRequestDto;
-import com.hong.admin.web.dto.PostsUpdateRequestDto;
+import com.hong.admin.web.dto.postsDto.PostsSaveRequestDto;
+import com.hong.admin.web.dto.postsDto.PostsUpdateRequestDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;

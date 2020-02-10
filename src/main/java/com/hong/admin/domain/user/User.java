@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class User extends BaseTimeEntity {
 
     @Id
+    @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -24,6 +25,7 @@ public class User extends BaseTimeEntity {
 
     @Column
     private String picture;
+
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

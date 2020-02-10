@@ -13,6 +13,14 @@ var index = {
         $('#btn-delete').on('click', function () {
             _this.delete();
         });
+
+        $('#btn-follow').on('click', function () {
+            _this.follow();
+        })
+
+        $('#btn-follow-cancel').on('click', function () {
+            _this.followCancel();
+        })
     },
     save : function () {
       var data = {
@@ -39,7 +47,7 @@ var index = {
         var data = {
             title: $('#title').val(),
             content: $('#content').val()
-        }
+        };
 
         var id = $('#id').val();
 
@@ -68,6 +76,48 @@ var index = {
         }).done(function () {
             alert('글이 삭제되었습니다.');
             window.location.href ='/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    },
+
+    follow : function () {
+        var email = $('#email').val();
+
+        var data = {
+            toEmail: email
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/following',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            alert('팔로우 요청 되었습니다.');
+            window.location.href = '/user/info/' + email
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    
+    followCancel : function () {
+        var email = $('#email').val();
+
+        var data = {
+            toEmail: email
+        };
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/follow/cancel',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            alert('팔로우가 취소 되었습니다.');
+            window.location.href ='/user/info/' + email;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
