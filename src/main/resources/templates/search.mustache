@@ -1,0 +1,45 @@
+{{>layout/header}}
+
+<h1> 해시태그 검색 </h1>
+
+<br/>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-4">
+            {{#tag}}
+                <h2>검색 태그: {{tag}}</h2>
+            {{/tag}}
+            <input type="text" class="form-control" id="search" placeholder="해시태그 입력">
+            <button type="button" class="btn btn-primary" id="btn-search">검색</button>
+        </div>
+    </div>
+
+
+    <br/>
+    <a href="/" role="button" class="btn btn-primary">되돌아가기</a>
+    <!--목록 출력 영역-->
+    <table class="table table-horizontal table-boarded">
+        <thead class="thead-strong">
+        <tr>
+            <th>게시글번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>최종수정일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#posts}}
+            <tr>
+                <td>{{id}}</td>
+                <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                <td>{{author}}(<a href="/user/info/{{email}}">{{email}}</a>)
+                </td>
+                <td>{{modifiedDate}}</td>
+            </tr>
+        {{/posts}}
+        </tbody>
+    </table>
+</div>
+
+{{>layout/footer}}

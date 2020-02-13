@@ -3,6 +3,7 @@ package com.hong.admin.domain.registration;
 import com.hong.admin.domain.BaseTimeEntity;
 import com.hong.admin.domain.hashtag.Hashtag;
 import com.hong.admin.domain.posts.Posts;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,4 +27,18 @@ public class Registration extends BaseTimeEntity {
     @JoinColumn(name = "POSTS_ID")
     Posts posts;
 
+
+    @Builder
+    public Registration(Hashtag hashtag, Posts posts){
+        this.hashtag = hashtag;
+        this.posts = posts;
+    }
+
+    void setPosts(Posts posts){
+        this.posts = posts;
+    }
+
+    void setHashtag(Hashtag hashtag){
+        this.hashtag = hashtag;
+    }
 }

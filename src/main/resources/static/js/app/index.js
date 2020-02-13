@@ -1,3 +1,5 @@
+var tagPostlist;
+
 var index = {
     init : function () {
         var _this = this;
@@ -20,6 +22,10 @@ var index = {
 
         $('#btn-follow-cancel').on('click', function () {
             _this.followCancel();
+        })
+
+        $('#btn-search').on('click', function () {
+            _this.search();
         })
     },
     save : function () {
@@ -118,6 +124,19 @@ var index = {
         }).done(function () {
             alert('팔로우가 취소 되었습니다.');
             window.location.href ='/user/info/' + email;
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        })
+    },
+
+    search : function () {
+        var tagWord = $('#search').val();
+
+        $.ajax({
+            type: 'GET',
+            url: '/search?tag=' + tagWord
+        }).done(function () {
+            window.location.href = '/search/tag?word=' + tagWord;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })

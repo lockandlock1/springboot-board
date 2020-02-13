@@ -12,13 +12,19 @@
                         Logged in as: <span id="user">{{loginUserEmail}}</span>
 
                         <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+                        <a href="/search" role="button" class="btn btn-primary">해시태그 검색</a>
                     {{/loginUserEmail}}
                     {{^loginUserEmail}}
                         <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
                     {{/loginUserEmail}}
+
                 </div>
         </div>
         <br>
+
+
+
+        <br/>
         <!--목록 출력 영역-->
         <table class="table table-horizontal table-boarded">
             <thead class="thead-strong">

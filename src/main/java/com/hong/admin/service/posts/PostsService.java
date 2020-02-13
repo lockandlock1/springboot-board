@@ -1,6 +1,7 @@
 package com.hong.admin.service.posts;
 
 
+import com.hong.admin.domain.hashtag.Hashtag;
 import com.hong.admin.domain.posts.Posts;
 import com.hong.admin.domain.posts.PostsRepository;
 import com.hong.admin.domain.registration.Registration;
@@ -41,7 +42,13 @@ public class PostsService {
                 .posts(entity)
                 .build();
 
-        hashtagService.findByTagName(reg.getHashtags());
+        List<Hashtag> list = hashtagService.save(reg.getHashtags());
+
+
+        for(Hashtag hashtag : list){
+            registrationService.save(hashtag, entity);
+        }
+
 
         return postId;
     }
@@ -50,6 +57,9 @@ public class PostsService {
     @Transactional
     public Long update(Long id, PostsUpdateRequestDto requestDto){
         Posts posts = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id= " + id));
+
+
+        // Registration Table 수정, Tagetable 확인
         posts.update(requestDto.getTitle(), requestDto.getContent());
 
         return id;
@@ -69,6 +79,7 @@ public class PostsService {
     @Transactional
     public void delete(Long id){
         Posts entity = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id= " + id));
+        // Registraetion삭제, 태그는 쓰이는 곳이 없다면 삭제
         postsRepository.delete(entity);
     }
 
