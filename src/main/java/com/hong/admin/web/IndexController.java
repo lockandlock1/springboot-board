@@ -3,7 +3,6 @@ package com.hong.admin.web;
 import com.hong.admin.config.auth.LoginUser;
 import com.hong.admin.config.auth.dto.SessionUser;
 import com.hong.admin.domain.user.User;
-import com.hong.admin.domain.user.UserRepository;
 import com.hong.admin.service.follow.FollowService;
 import com.hong.admin.service.posts.PostsService;
 import com.hong.admin.service.user.UserService;
@@ -60,6 +59,8 @@ public class IndexController {
         User targetUser = userService.findByEmail(email);
         Long targetId = userService.findByEmail(email).getId();
 
+        model.addAttribute("followingCount", followService.coutFollowing(targetId));
+        model.addAttribute("followerCount", followService.countFollower(targetId));
         model.addAttribute("user", targetUser);
         model.addAttribute("follower", followService.findAllFollowers(targetId));
         model.addAttribute("following", followService.findAllFollowings(targetId));

@@ -29,6 +29,7 @@ public class PostsSaveRequestDto {
         this.user = user;
     }
 
+
     public Posts toEntity(){
         return Posts.builder()
                     .title(title)
@@ -38,4 +39,7 @@ public class PostsSaveRequestDto {
                     .user(user)
                     .build();
     }
+
+
+
 }

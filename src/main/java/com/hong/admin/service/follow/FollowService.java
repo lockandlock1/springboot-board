@@ -4,16 +4,12 @@ import com.hong.admin.domain.follow.Follow;
 import com.hong.admin.domain.follow.FollowRepository;
 import com.hong.admin.domain.user.User;
 import com.hong.admin.domain.user.UserRepository;
-import com.hong.admin.web.dto.followDto.FollowingListResponseDto;
 import com.hong.admin.web.dto.followDto.FollowingRequestDto;
-import com.hong.admin.web.dto.userDto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RequiredArgsConstructor
 @Service
@@ -58,12 +54,26 @@ public class FollowService {
     }
 
     @Transactional
-    public List<Follow> findAllFollowings(Long targetId){
-        return followRepository.findAllFollowing(targetId);
+    public List<Follow> findAllFollowings(Long toId){
+
+        return followRepository.findAllFollowing(toId);
     }
 
     @Transactional
-    public List<Follow> findAllFollowers(Long targetId){
-        return followRepository.findAllFollower(targetId);
+    public List<Follow> findAllFollowers(Long fromId){
+
+        return followRepository.findAllFollower(fromId);
+    }
+
+    @Transactional
+    public int countFollower(Long toId){
+
+        return followRepository.countByToId(toId);
+    }
+
+    @Transactional
+    public int coutFollowing(Long fromId){
+
+        return followRepository.countByFromId(fromId);
     }
 }

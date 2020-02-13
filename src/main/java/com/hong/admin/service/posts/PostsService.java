@@ -3,15 +3,20 @@ package com.hong.admin.service.posts;
 
 import com.hong.admin.domain.posts.Posts;
 import com.hong.admin.domain.posts.PostsRepository;
+import com.hong.admin.domain.registration.Registration;
+import com.hong.admin.service.hashtag.HashtagService;
+import com.hong.admin.service.registration.RegistrationService;
 import com.hong.admin.web.dto.postsDto.PostsListResponseDto;
 import com.hong.admin.web.dto.postsDto.PostsResponseDto;
 import com.hong.admin.web.dto.postsDto.PostsSaveRequestDto;
 import com.hong.admin.web.dto.postsDto.PostsUpdateRequestDto;
+import com.hong.admin.web.dto.registrationDto.RegistrationSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,9 +26,24 @@ import java.util.stream.Collectors;
 public class PostsService {
     private final PostsRepository postsRepository;
 
+    private final RegistrationService registrationService;
+
+    private final HashtagService hashtagService;
+
     @Transactional
     public Long save(PostsSaveRequestDto requestDto){
-        return postsRepository.save(requestDto.toEntity()).getId();
+        Long postId = postsRepository.save(requestDto.toEntity()).getId();
+
+        Posts entity = postsRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id= " + postId));
+
+        RegistrationSaveRequestDto reg = RegistrationSaveRequestDto.builder()
+                .hashtags(requestDto.getTitle())
+                .posts(entity)
+                .build();
+
+        hashtagService.findByTagName(reg.getHashtags());
+
+        return postId;
     }
 
 
