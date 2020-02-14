@@ -2,6 +2,7 @@ package com.hong.admin.service.hashtag;
 
 import com.hong.admin.domain.hashtag.Hashtag;
 import com.hong.admin.domain.hashtag.HashtagRepository;
+import com.hong.admin.service.registration.RegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,8 @@ import java.util.List;
 @Service
 public class HashtagService {
     private final HashtagRepository hashtagRepository;
+
+
 
     @Transactional
     public List<Hashtag> save(List<String> hashtags) {
@@ -30,8 +33,15 @@ public class HashtagService {
         return list;
     }
 
+
     @Transactional
     public Hashtag findByTagName(String tag) {
         return hashtagRepository.findByTagName(tag).orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 태그 입니다."));
     }
+
+    @Transactional
+    public void deleteAll(List<Hashtag> list) {
+       hashtagRepository.deleteAll(list);
+    }
+
 }

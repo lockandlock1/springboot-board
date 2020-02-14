@@ -12,6 +12,7 @@ import com.hong.admin.web.dto.postsDto.PostsResponseDto;
 import com.hong.admin.web.dto.postsDto.PostsSaveRequestDto;
 import com.hong.admin.web.dto.postsDto.PostsUpdateRequestDto;
 import com.hong.admin.web.dto.registrationDto.RegistrationSaveRequestDto;
+import com.hong.admin.web.dto.registrationDto.RegistrationUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,6 +63,19 @@ public class PostsService {
         // Registration Table 수정, Tagetable 확인
         posts.update(requestDto.getTitle(), requestDto.getContent());
 
+        RegistrationSaveRequestDto reg = RegistrationSaveRequestDto.builder()
+                .hashtags(requestDto.getTitle())
+                .posts(posts)
+                .build();
+
+        List<Hashtag> list = hashtagService.save(reg.getHashtags());
+
+        RegistrationUpdateDto registrationUpdateDto = RegistrationUpdateDto.builder()
+                                                                            .hashtags(list)
+                                                                            .posts(posts)
+                                                                            .build();
+        registrationService.update(registrationUpdateDto);
+
         return id;
     }
 
@@ -80,6 +94,25 @@ public class PostsService {
     public void delete(Long id){
         Posts entity = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id= " + id));
         // Registraetion삭제, 태그는 쓰이는 곳이 없다면 삭제
+        RegistrationSaveRequestDto reg = RegistrationSaveRequestDto.builder()
+                .hashtags(entity.getTitle())
+                .posts(entity)
+                .build();
+
+        List<Hashtag> hashtaglist = hashtagService.save(reg.getHashtags());
+
+
+        registrationService.deleteAll(entity);
+
+        List<Hashtag> deleteHashtaglist = new ArrayList<>();
+        for(Hashtag hashtag : hashtaglist) {
+            if(registrationService.findRegistraitonByHashtag(hashtag) < 1){
+                deleteHashtaglist.add(hashtag);
+            }
+        }
+
+        hashtagService.deleteAll(deleteHashtaglist);
+
         postsRepository.delete(entity);
     }
 
