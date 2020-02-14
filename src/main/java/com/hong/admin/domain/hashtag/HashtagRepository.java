@@ -8,4 +8,6 @@ public interface HashtagRepository extends JpaRepository<Hashtag, Long> {
 
 
     Optional<Hashtag> findByTagName(String str);
+
+    boolean existsByTagName(String tagName);
 }

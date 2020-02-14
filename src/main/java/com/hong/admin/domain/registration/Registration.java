@@ -38,7 +38,4 @@ public class Registration extends BaseTimeEntity {
         this.posts = posts;
     }
 
-    void setHashtag(Hashtag hashtag){
-        this.hashtag = hashtag;
-    }
 }

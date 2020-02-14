@@ -14,15 +14,19 @@ import java.util.List;
 public class HashtagService {
     private final HashtagRepository hashtagRepository;
 
+
+
     @Transactional
     public List<Hashtag> save(List<String> hashtags) {
         List<Hashtag> list = new ArrayList<>();
 
         for(String hashtag : hashtags){
-           hashtagRepository.findByTagName(hashtag).orElseGet(() -> hashtagRepository.save(
-                                                                                            Hashtag.builder()
-                                                                                                    .tagName(hashtag)
-                                                                                                    .build()));
+           if(!hashtagRepository.existsByTagName(hashtag)){
+               hashtagRepository.save(
+                       Hashtag.builder()
+                               .tagName(hashtag)
+                               .build());
+           }
 
            list.add(hashtagRepository.findByTagName(hashtag).orElseThrow(()-> new IllegalArgumentException("존재 하지 않는 태그 입니다.")));
         }
@@ -30,8 +34,15 @@ public class HashtagService {
         return list;
     }
 
+
     @Transactional
     public Hashtag findByTagName(String tag) {
         return hashtagRepository.findByTagName(tag).orElseThrow(() -> new IllegalArgumentException("존재 하지 않는 태그 입니다."));
     }
+
+    @Transactional
+    public void deleteAll(List<Hashtag> list) {
+       hashtagRepository.deleteAll(list);
+    }
+
 }

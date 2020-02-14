@@ -54,15 +54,15 @@ public class FollowService {
     }
 
     @Transactional
-    public List<Follow> findAllFollowings(Long toId){
+    public List<Follow> findAllFollowings(Long fromId){
 
-        return followRepository.findAllFollowing(toId);
+        return followRepository.findAllFollowing(fromId);
     }
 
     @Transactional
-    public List<Follow> findAllFollowers(Long fromId){
+    public List<Follow> findAllFollowers(Long toId){
 
-        return followRepository.findAllFollower(fromId);
+        return followRepository.findAllFollower(toId);
     }
 
     @Transactional

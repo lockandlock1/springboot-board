@@ -1,6 +1,5 @@
 package com.hong.admin.web.dto.registrationDto;
 
-
 import com.hong.admin.domain.posts.Posts;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -38,7 +38,7 @@ public class RegistrationSaveRequestDto {
             }
         }
 
-        return hashtags;
+        return hashtags.stream().distinct().collect(Collectors.toList());
 
     }
 
@@ -51,5 +51,4 @@ public class RegistrationSaveRequestDto {
 
         return str;
     }
-
 }

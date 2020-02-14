@@ -18,8 +18,12 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
     int countByToId(Long toId);
 
     @Query("select p from Follow p where p.toId = ?1")
-    List<Follow> findAllFollower(Long targetId);
+    List<Follow> findAllFollower(Long toId);
+
+    List<Follow> findFollowsByToId(Long toId);
 
     @Query("select p from Follow p where p.fromId = ?1")
-    List<Follow> findAllFollowing(Long targetId);
+    List<Follow> findAllFollowing(Long fromId);
+
+    List<Follow> findFollowsByFromId(Long fromId);
 }
