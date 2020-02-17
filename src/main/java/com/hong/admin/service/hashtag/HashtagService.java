@@ -2,7 +2,6 @@ package com.hong.admin.service.hashtag;
 
 import com.hong.admin.domain.hashtag.Hashtag;
 import com.hong.admin.domain.hashtag.HashtagRepository;
-import com.hong.admin.service.registration.RegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
