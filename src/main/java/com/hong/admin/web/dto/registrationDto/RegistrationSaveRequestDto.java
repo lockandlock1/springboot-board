@@ -1,5 +1,7 @@
 package com.hong.admin.web.dto.registrationDto;
 
+
+import com.hong.admin.domain.hashtag.Hashtag;
 import com.hong.admin.domain.posts.Posts;
 import lombok.Builder;
 import lombok.Getter;

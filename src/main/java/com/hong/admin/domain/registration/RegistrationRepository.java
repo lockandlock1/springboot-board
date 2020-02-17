@@ -3,6 +3,7 @@ package com.hong.admin.domain.registration;
 import com.hong.admin.domain.hashtag.Hashtag;
 import com.hong.admin.domain.posts.Posts;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
