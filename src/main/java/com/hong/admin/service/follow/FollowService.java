@@ -65,15 +65,17 @@ public class FollowService {
         return followRepository.findAllFollower(toId);
     }
 
-    @Transactional
-    public int countFollower(Long toId){
-
-        return followRepository.countByToId(toId);
-    }
 
     @Transactional
     public int coutFollowing(Long fromId){
 
         return followRepository.countByFromId(fromId);
     }
+
+    @Transactional
+    public int countFollower(Long toId){
+
+        return followRepository.countByToId(toId);
+    }
+
 }
